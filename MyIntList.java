@@ -2,7 +2,7 @@ public class MyIntList extends TestIntList implements IntList{
 
     int[] intArray = new int[30];
     int index;
-    int numBooks;
+    int numBooks; // This variable keeps track of the number of items in the array; while the items are integers, referring to them as books helps me conceptually understand how to add/remove them.
 
 
     public MyIntList(){
@@ -59,13 +59,12 @@ public class MyIntList extends TestIntList implements IntList{
      */
     public int remove(int index){
 
-            for (int indexNum = 0; indexNum < intArray.length-1; indexNum++){
-                if (indexNum == index){
-                    intArray[indexNum] = intArray[intArray.length - 1];
-                    numBooks--;
-                }
+        for (int indexNum = 0; indexNum < intArray.length-1; indexNum++){
+            if (indexNum == index){
+                intArray[indexNum] = intArray[intArray.length - 1];
+                numBooks--;
             }
-            //intArray[intArray.length - 1] = null;
+        }
         return get(index);
     }
 
@@ -104,14 +103,25 @@ public class MyIntList extends TestIntList implements IntList{
      * @return true if the list is empty.
      */
     public boolean isEmpty(){
-
+        if (numBooks == 0){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     /**
      * Makes the list empty.
      */
+    @Override
     public void clear(){
-
+        numBooks = 0;
+        // for (int indexNum = 0; indexNum < intArray.length-1; indexNum++){
+        //     remove(indexNum);
+        //     System.out.println(numBooks);
+        //     numBooks --;
+        // }
     }
 
     /**
