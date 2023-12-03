@@ -5,6 +5,9 @@ public class TestIntList {
     public static void runTests(IntList list) {
         // Test 1
         addItems(list, 500);
+        for (int i=0; i<500; i++){
+        list.get(i);
+        }
         
         // Test 2
         for (int i=0; i<500; i++) {
@@ -29,8 +32,11 @@ public class TestIntList {
         list.add(1);
         list.add(3);
         list.add(4);
+
         list.add(1, 2);
+
         list.remove(3);
+
         if (!Arrays.equals(list.toArray(), new int [] {1, 2, 3})) {
             throw new RuntimeException("Test 5: add and remove test failed!");
         }

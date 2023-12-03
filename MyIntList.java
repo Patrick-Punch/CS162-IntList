@@ -1,8 +1,8 @@
 public class MyIntList extends TestIntList implements IntList{
 
-    int[] intArray = new int[30];
-    int index;
-    int numBooks; // This variable keeps track of the number of items in the array; while the items are integers, referring to them as books helps me conceptually understand how to add/remove them.
+    private int[] intArray;
+    private int totalNums = 0;
+    private int newCapacity;
 
 
     public MyIntList(){
@@ -15,9 +15,26 @@ public class MyIntList extends TestIntList implements IntList{
      * @param value the value to add.
      */
    public void add(int value){
-        intArray[intArray.length -1] = value;
-        numBooks += 1;
-   }
+    /*
+     * Use new array to resize and add values
+     */
+
+    resize();
+    int[] intArrayV2 = new int[newCapacity];
+
+    if (totalNums == (intArray.length)){
+        for (int i = 0; i < intArray.length; i++){
+            intArrayV2[i] = intArray[i];
+        }
+        intArrayV2[intArray.length] = value;
+        intArray = intArrayV2;
+    }
+     else{
+         intArray[totalNums] = value;
+    }
+    totalNums ++;
+    }
+   
 
     /**
      * Adds a value to the list at the specific list index.
@@ -26,9 +43,25 @@ public class MyIntList extends TestIntList implements IntList{
      * @param value the value to add.
      */
     public void add(int index, int value){
-        //index = this.index;
-        intArray[index] = value;
-        numBooks +=1;
+
+        /*
+         * Use a new array to resize and add values when shifting values to the right of the given index
+         * 
+         */        
+
+        resize();
+        int[] intArrayV2 = new int[newCapacity];
+
+        for (int i=0, j = 0; i < intArray.length; i++){
+            if (i == index){
+                intArrayV2[i] = value;
+            }
+            else {
+                intArrayV2[i] = intArray[j++];
+            }
+        }
+        totalNums++;
+        intArray = intArrayV2;
     }
 
     /**
@@ -38,17 +71,26 @@ public class MyIntList extends TestIntList implements IntList{
      * @return the value at the index.
      */
     public int get(int index){
-        int indexCount = 0;
-        for (int i : intArray){
-            if (indexCount != index){
-                indexCount += 1;
-            }
-            else {
-           // System.out.println("Integer Value at index [" + index + "]: " + i);
-            return i;
+        for (int i = 0; i < intArray.length; i++){
+            if (i == index){
+                return intArray[index];
             }
         }
-        return this.index;
+        return intArray[index];
+    }
+
+    /**
+     * Takes the size of the current array, and doubles it (if it is not 0), then copies the values from the original array into the new one. This allows the array to grow as needed when adding to it.
+     */
+    private void resize(){
+        if (totalNums >= intArray.length){
+            if (intArray.length != 0){
+                newCapacity = intArray.length * 2;
+            }
+            else{
+                newCapacity = 1;
+            }
+        }
     }
 
     /**
@@ -58,14 +100,13 @@ public class MyIntList extends TestIntList implements IntList{
      * @return the value that was removed.
      */
     public int remove(int index){
-
-        for (int indexNum = 0; indexNum < intArray.length-1; indexNum++){
-            if (indexNum == index){
-                intArray[indexNum] = intArray[intArray.length - 1];
-                numBooks--;
-            }
+        int numberRemoved = intArray[index];
+        intArray[index] = 0;
+        for (int i = index; i < totalNums-1; i++){
+            intArray[i] = intArray[i + 1];
         }
-        return get(index);
+        totalNums--;
+        return numberRemoved;
     }
 
     /**
@@ -75,35 +116,15 @@ public class MyIntList extends TestIntList implements IntList{
      */
     @Override
     public int size(){
-        //numOfInts = currentIndex
-        int currentIndex = 0;
-        currentIndex = numBooks;
-        return numBooks;
-        // int value;
-        // for (int i = 0; i < intArray.length - 1; i++){
-        //     //resize bookshelf (if needed)
-        //     //
-        //     //this.add(value){ 
-        //     intArray[currentIndex] = value;
-        //     currentIndex ++;
-        // }
+        return totalNums;
     }
-        // System.out.println("Current size of intArray: "+ size + " integers.");
-        // int indexCount = 0;
-        // for (int i : intArray){
-        //     indexCount ++;
-        //     index = indexCount;
-        // }
-        // System.out.println("Capacity of intArray: " + index);
-        // return index;
-    //}
     /**
      * Returns true if the list is empty, false otherwise.
      * 
      * @return true if the list is empty.
      */
     public boolean isEmpty(){
-        if (numBooks == 0){
+        if (totalNums == 0){
             return true;
         }
         else {
@@ -116,21 +137,21 @@ public class MyIntList extends TestIntList implements IntList{
      */
     @Override
     public void clear(){
-        numBooks = 0;
-        // for (int indexNum = 0; indexNum < intArray.length-1; indexNum++){
-        //     remove(indexNum);
-        //     System.out.println(numBooks);
-        //     numBooks --;
-        // }
+        totalNums = 0;
+        intArray = new int[0];
     }
 
     /**
      * Returns an int[] representation of the list.
-     * 
+     * Creates a new int[] called currentArray, that contains only the elements provided into intArray, and not its available capacity.
      * @return the list as an int[].
      */
     public int[] toArray(){
-
+        int[] currentArray = new int[totalNums];
+        for (int i = 0; i < totalNums; i++){
+            currentArray[i] = intArray[i];
+        }
+        return currentArray;
     } 
     
 }

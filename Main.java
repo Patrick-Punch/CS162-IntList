@@ -4,7 +4,11 @@ public class Main extends TestIntList {
 
     public static void main(String[] args){
         MyIntList intArray = new MyIntList();
+
+
         runTests(intArray);
+
+
         /*
          * Tests
          */
