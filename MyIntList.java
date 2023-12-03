@@ -20,14 +20,14 @@ public class MyIntList extends TestIntList implements IntList{
      */
 
     resize();
-    int[] intArrayV2 = new int[newCapacity];
+    int[] newIntArray = new int[newCapacity];
 
     if (totalNums == (intArray.length)){
         for (int i = 0; i < intArray.length; i++){
-            intArrayV2[i] = intArray[i];
+            newIntArray[i] = intArray[i];
         }
-        intArrayV2[intArray.length] = value;
-        intArray = intArrayV2;
+        newIntArray[intArray.length] = value;
+        intArray = newIntArray;
     }
      else{
          intArray[totalNums] = value;
@@ -50,18 +50,18 @@ public class MyIntList extends TestIntList implements IntList{
          */        
 
         resize();
-        int[] intArrayV2 = new int[newCapacity];
+        int[] newIntArray = new int[newCapacity];
 
         for (int i=0, j = 0; i < intArray.length; i++){
             if (i == index){
-                intArrayV2[i] = value;
+                newIntArray[i] = value;
             }
             else {
-                intArrayV2[i] = intArray[j++];
+                newIntArray[i] = intArray[j++];
             }
         }
         totalNums++;
-        intArray = intArrayV2;
+        intArray = newIntArray;
     }
 
     /**
@@ -135,7 +135,6 @@ public class MyIntList extends TestIntList implements IntList{
     /**
      * Makes the list empty.
      */
-    @Override
     public void clear(){
         totalNums = 0;
         intArray = new int[0];
