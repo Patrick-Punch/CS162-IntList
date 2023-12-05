@@ -24,12 +24,10 @@ public class MyIntList extends TestIntList implements IntList{
      */
     public void add(int index, int value){
         resize();
-        if (index < totalNums){
             for (int i = totalNums; i >= index; i--){
                 intArray[i + 1] = intArray[i];
             }
-            intArray[index] = value;
-        }
+        intArray[index] = value;
         totalNums++;
     }
     /**
