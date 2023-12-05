@@ -2,28 +2,20 @@ public class MyIntList extends TestIntList implements IntList{
 
     private int[] intArray;
     private int totalNums = 0;
-    private int newCapacity;
-
 
     public MyIntList(){
         intArray = new int[30];
     }
-   
     /**
      * Adds a value to the end of the list.
      * 
      * @param value the value to add.
      */
    public void add(int value){
-    /*
-     * Use new array to resize and add values
-     */
     resize();
     intArray[totalNums] = value;
     totalNums++;
     }
-   
-
     /**
      * Adds a value to the list at the specific list index.
      * 
@@ -31,11 +23,6 @@ public class MyIntList extends TestIntList implements IntList{
      * @param value the value to add.
      */
     public void add(int index, int value){
-
-        /*
-         * Use a new array to resize and add values when shifting values to the right of the given index
-         * 
-         */   
         resize();
         for (int i = 0; i < intArray.length; i++){
             if (i == index){
@@ -61,10 +48,8 @@ public class MyIntList extends TestIntList implements IntList{
             intArray = newIntArray;
         }
     }
-
     /**
      * Returns the value at the specified index.
-     * 
      * @param index the index.
      * @return the value at the index.
      */
@@ -73,7 +58,6 @@ public class MyIntList extends TestIntList implements IntList{
     }
     /**
      * Removes a value at the specified index.
-     * 
      * @param index the index.
      * @return the value that was removed.
      */
@@ -86,10 +70,8 @@ public class MyIntList extends TestIntList implements IntList{
         totalNums--;
         return numberRemoved;
     }
-
     /**
      * Returns the size of the list.
-     * 
      * @return the size of the list.
      */
     @Override
@@ -109,15 +91,12 @@ public class MyIntList extends TestIntList implements IntList{
             return false;
         }
     }
-
     /**
      * Makes the list empty.
      */
     public void clear(){
         totalNums = 0;
-        //intArray = new int[0];
     }
-
     /**
      * Returns an int[] representation of the list.
      * Creates a new int[] called currentArray, that contains only the elements provided into intArray, and not its available capacity.
@@ -130,5 +109,5 @@ public class MyIntList extends TestIntList implements IntList{
         }
         return currentArray;
     } 
-    
 }
+
