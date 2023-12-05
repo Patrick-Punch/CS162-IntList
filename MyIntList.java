@@ -21,20 +21,6 @@ public class MyIntList extends TestIntList implements IntList{
     resize();
     intArray[totalNums] = value;
     totalNums++;
-
-    // int[] newIntArray = new int[newCapacity];
-
-    // if (totalNums == (intArray.length)){
-    //     for (int i = 0; i < intArray.length; i++){
-    //         newIntArray[i] = intArray[i];
-    //     }
-    //     newIntArray[intArray.length] = value;
-    //     intArray = newIntArray;
-    // }
-    //  else{
-    //      intArray[totalNums] = value;
-    // }
-    // totalNums ++;
     }
    
 
@@ -62,43 +48,13 @@ public class MyIntList extends TestIntList implements IntList{
             }
         }        
         totalNums++;
-        /**
-         * Old Code b
-         */
-        // resize();
-        // int[] newIntArray = new int[newCapacity];
-
-        // for (int i=0, j = 0; i < intArray.length; i++){
-        //     if (i == index){
-        //         newIntArray[i] = value;
-        //     }
-        //     else {
-        //         newIntArray[i] = intArray[j++];
-        //     }
-        // }
-        // totalNums++;
-        // intArray = newIntArray;
-        /**
-         * End Old Code
-         */
     }
     /**
      * Takes the size of the current array, and doubles it (if it is not 0), then copies the values from the original array into the new one. This allows the array to grow as needed when adding to it.
      */
     private void resize(){
         if (totalNums >= intArray.length){
-            // newCapacity = intArray.length * 2;
-            // if (intArray.length != 0){
-            //     newCapacity = intArray.length * 2;
-            // }
-            // else{
-            //     newCapacity = 1;
-            // }
-            /*
-             * integrating new array to this method
-             */
             int[] newIntArray = new int[intArray.length * 2];
-            // int[] newIntArray = new int[newCapacity];
             for (int i = 0; i < intArray.length; i++){
                 newIntArray[i] = intArray[i];
             }
@@ -113,11 +69,6 @@ public class MyIntList extends TestIntList implements IntList{
      * @return the value at the index.
      */
     public int get(int index){
-        for (int i = 0; i < intArray.length; i++){
-            if (i == index){
-                return intArray[index];
-            }
-        }
         return intArray[index];
     }
     /**

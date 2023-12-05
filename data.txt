@@ -1,0 +1,37 @@
+        
+    /**
+     * Old Code for add() method
+     */
+    // int[] newIntArray = new int[newCapacity];
+
+    // if (totalNums == (intArray.length)){
+    //     for (int i = 0; i < intArray.length; i++){
+    //         newIntArray[i] = intArray[i];
+    //     }
+    //     newIntArray[intArray.length] = value;
+    //     intArray = newIntArray;
+    // }
+    //  else{
+    //      intArray[totalNums] = value;
+    // }
+    // totalNums ++;
+        
+        /**
+         * Old Code for add(index, value) method
+         */
+        // resize();
+        // int[] newIntArray = new int[newCapacity];
+
+        // for (int i=0, j = 0; i < intArray.length; i++){
+        //     if (i == index){
+        //         newIntArray[i] = value;
+        //     }
+        //     else {
+        //         newIntArray[i] = intArray[j++];
+        //     }
+        // }
+        // totalNums++;
+        // intArray = newIntArray;
+        /**
+         * End Old Code
+         */
