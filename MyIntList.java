@@ -18,21 +18,23 @@ public class MyIntList extends TestIntList implements IntList{
     /*
      * Use new array to resize and add values
      */
-
     resize();
-    int[] newIntArray = new int[newCapacity];
+    intArray[totalNums] = value;
+    totalNums++;
 
-    if (totalNums == (intArray.length)){
-        for (int i = 0; i < intArray.length; i++){
-            newIntArray[i] = intArray[i];
-        }
-        newIntArray[intArray.length] = value;
-        intArray = newIntArray;
-    }
-     else{
-         intArray[totalNums] = value;
-    }
-    totalNums ++;
+    // int[] newIntArray = new int[newCapacity];
+
+    // if (totalNums == (intArray.length)){
+    //     for (int i = 0; i < intArray.length; i++){
+    //         newIntArray[i] = intArray[i];
+    //     }
+    //     newIntArray[intArray.length] = value;
+    //     intArray = newIntArray;
+    // }
+    //  else{
+    //      intArray[totalNums] = value;
+    // }
+    // totalNums ++;
     }
    
 
@@ -47,21 +49,61 @@ public class MyIntList extends TestIntList implements IntList{
         /*
          * Use a new array to resize and add values when shifting values to the right of the given index
          * 
-         */        
-
+         */   
         resize();
-        int[] newIntArray = new int[newCapacity];
-
-        for (int i=0, j = 0; i < intArray.length; i++){
+        for (int i = 0; i < intArray.length; i++){
             if (i == index){
-                newIntArray[i] = value;
+                if (index < totalNums){
+                    for(int j = totalNums; j >= index; j--){
+                        intArray[j + 1] = intArray[j];
+                    }
+                }
+                intArray[index] = value;
             }
-            else {
-                newIntArray[i] = intArray[j++];
-            }
-        }
+        }        
         totalNums++;
-        intArray = newIntArray;
+        /**
+         * Old Code b
+         */
+        // resize();
+        // int[] newIntArray = new int[newCapacity];
+
+        // for (int i=0, j = 0; i < intArray.length; i++){
+        //     if (i == index){
+        //         newIntArray[i] = value;
+        //     }
+        //     else {
+        //         newIntArray[i] = intArray[j++];
+        //     }
+        // }
+        // totalNums++;
+        // intArray = newIntArray;
+        /**
+         * End Old Code
+         */
+    }
+    /**
+     * Takes the size of the current array, and doubles it (if it is not 0), then copies the values from the original array into the new one. This allows the array to grow as needed when adding to it.
+     */
+    private void resize(){
+        if (totalNums >= intArray.length){
+            // newCapacity = intArray.length * 2;
+            // if (intArray.length != 0){
+            //     newCapacity = intArray.length * 2;
+            // }
+            // else{
+            //     newCapacity = 1;
+            // }
+            /*
+             * integrating new array to this method
+             */
+            int[] newIntArray = new int[intArray.length * 2];
+            // int[] newIntArray = new int[newCapacity];
+            for (int i = 0; i < intArray.length; i++){
+                newIntArray[i] = intArray[i];
+            }
+            intArray = newIntArray;
+        }
     }
 
     /**
@@ -78,21 +120,6 @@ public class MyIntList extends TestIntList implements IntList{
         }
         return intArray[index];
     }
-
-    /**
-     * Takes the size of the current array, and doubles it (if it is not 0), then copies the values from the original array into the new one. This allows the array to grow as needed when adding to it.
-     */
-    private void resize(){
-        if (totalNums >= intArray.length){
-            if (intArray.length != 0){
-                newCapacity = intArray.length * 2;
-            }
-            else{
-                newCapacity = 1;
-            }
-        }
-    }
-
     /**
      * Removes a value at the specified index.
      * 
@@ -137,7 +164,7 @@ public class MyIntList extends TestIntList implements IntList{
      */
     public void clear(){
         totalNums = 0;
-        intArray = new int[0];
+        //intArray = new int[0];
     }
 
     /**
