@@ -1,4 +1,5 @@
-public class MyIntList extends TestIntList implements IntList{
+import java.util.Arrays;
+public class MyIntList extends TestIntList implements SortableIntList{
 
     private int[] intArray;
     private int totalNums = 0;
@@ -11,7 +12,11 @@ public class MyIntList extends TestIntList implements IntList{
      * 
      * @param value the value to add.
      */
-   public void add(int value){
+
+     /*
+      * TODO: throw new exceptions where necessary
+      */
+    public void add(int value){
     resize();
     intArray[totalNums] = value;
     totalNums++;
@@ -102,6 +107,50 @@ public class MyIntList extends TestIntList implements IntList{
             currentArray[i] = intArray[i];
         }
         return currentArray;
-    } 
+    }
+    /**
+     * Returns a string representaion of the array
+     * @return the list as a String
+     */
+    public String toString(){
+        return Arrays.toString(toArray());
+    }
+    /**
+     * Sorts the list using the specified sort algorithm.
+     * 
+     * @param type the sort algorithm to use.
+     */
+    //might need to swap Algorithm to SortableIntList.Algorithm
+    public void sort(Algorithm type){
+        switch (type) {
+            case SELECTION:
+            /*
+             * call algorithm method here
+             * selectionSort();
+             */
+                break;
+            case INSERTION:
+            /*
+             * insertionSort();
+             */
+                break;
+            case MERGE: 
+            /*
+             * mergeSort();
+             */
+                break;
+            case QUICK:
+            /*
+             * quickSort();
+             */
+                break;
+            case HEAP:
+            /*
+             * heapSort();
+             */
+                break;
+        }
+    }
+    public void getAlgorithm(){
+    }
 }
-
