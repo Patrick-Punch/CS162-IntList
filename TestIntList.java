@@ -45,6 +45,10 @@ public class TestIntList {
         sortList(list, SortableIntList.Algorithm.INSERTION);   
         sortList(list, SortableIntList.Algorithm.SELECTION);
         sortList(list, SortableIntList.Algorithm.MERGE);
+        // sortList(list, SortableIntList.Algorithm.QUICK);
+        // sortList(list, SortableIntList.Algorithm.HEAP);
+
+
         System.out.println("All sort tests completed successfully");       
     }
 

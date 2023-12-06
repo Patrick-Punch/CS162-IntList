@@ -12,7 +12,6 @@ public class MyIntList extends TestIntList implements SortableIntList{
      * 
      * @param value the value to add.
      */
-
      /*
       * TODO: throw new exceptions where necessary
       */
@@ -120,37 +119,71 @@ public class MyIntList extends TestIntList implements SortableIntList{
      * 
      * @param type the sort algorithm to use.
      */
-    //might need to swap Algorithm to SortableIntList.Algorithm
     public void sort(Algorithm type){
         switch (type) {
             case SELECTION:
-            /*
-             * call algorithm method here
-             * selectionSort();
-             */
+            selectionSort();
                 break;
             case INSERTION:
-            /*
-             * insertionSort();
-             */
+            insertionSort();
                 break;
             case MERGE: 
-            /*
-             * mergeSort();
-             */
+            mergeSort();
                 break;
             case QUICK:
-            /*
-             * quickSort();
-             */
+            quickSort();
                 break;
             case HEAP:
-            /*
-             * heapSort();
-             */
+            heapSort();
                 break;
         }
     }
-    public void getAlgorithm(){
+    /**
+     * A method that implements a Selection Sort Algortithm
+     */
+    private void selectionSort(){
+        for (int i = 0; i < totalNums - 1; i++){
+            int min = i; // index position is current min
+            for (int j = i + 1; j < totalNums; j++){
+                if (intArray[j] < intArray[min]){ //if compared value is less than current min, compared value becomes min
+                    min = j;
+                }
+            }
+            int temp = intArray[i]; 
+            intArray[i] = intArray[min]; // swap minimum value with original value in list, continue for each index
+            intArray[min] = temp;
+        }
+    }
+    /**
+     * A method that implements a Insertion Sort Algortithm
+     */
+    private void insertionSort(){
+        for (int i = 1; i < totalNums; i++){ //start at 1 and compare to the value before it
+            int temp = intArray[i]; // current value at the index
+            while (i > 0 && temp < intArray[i - 1]){ // if the value at the index is less than than the index before it, swap the values
+                intArray[i] = intArray[i - 1];
+                i--; // move the index down, so the new order can be tested at the previous index
+            }
+            intArray[i] = temp; 
+        }
+    }
+    /**
+     * A method that implements a Merge Sort Algortithm
+     */
+    private void mergeSort(){
+
+    }
+    /**
+     * A method that implements a Quick Sort Algortithm
+     */
+    private void quickSort(){
+
+    }
+    /**
+     * A method that implements a Heap Sort Algortithm
+     */
+    private void heapSort()
+    {
+
     }
 }
