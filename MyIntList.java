@@ -171,7 +171,47 @@ public class MyIntList extends TestIntList implements SortableIntList{
      * A method that implements a Merge Sort Algortithm
      */
     private void mergeSort(){
+        int [] sortedArray = new int[totalNums]; //temporary array to sort into
+        mergeSortHelper(intArray, 0, totalNums-1, sortedArray);
+    }
+    private void mergeSortHelper(int[] intArray, int start, int end, int[] sortedArray){
+        if (start < end){
+            int arrayCenter = (start + end) / 2; 
+            int centerLeft = arrayCenter;
+            int centerRight = arrayCenter + 1;
+            mergeSortHelper(intArray, start, centerLeft, sortedArray); // Recursive call left side
+            mergeSortHelper(intArray, centerRight, end, sortedArray); // Recursive call right side
+            merge(intArray, start, arrayCenter, end, sortedArray); //sort + combine 
+        }
+    }
+    private void merge(int[] intArray, int start, int arrayCenter, int end, int[] sortedArray){
+        int leftIndex = start;
+        int rightIndex = arrayCenter + 1;
+        int sortedIndex = start;
 
+        while (leftIndex <= arrayCenter && rightIndex <= end){ //merge left and right side arrays
+            if (intArray[leftIndex] < intArray[rightIndex]){
+                sortedArray[sortedIndex] = intArray[leftIndex];
+                leftIndex++;
+            }else {
+                sortedArray[sortedIndex] = intArray[rightIndex];
+                rightIndex++;
+            }
+            sortedIndex++;
+        }
+        while (leftIndex <= arrayCenter){ // merge elements from the left 
+            sortedArray[sortedIndex] = intArray[leftIndex];
+            leftIndex++;
+            sortedIndex++;
+        }
+        while (rightIndex <= end){ //merge elements from the right 
+            sortedArray[sortedIndex] = intArray[rightIndex];
+            rightIndex++;
+            sortedIndex++;
+        }
+        for (sortedIndex = start; sortedIndex <= end; sortedIndex++){ //copy values to original array
+            intArray[sortedIndex] = sortedArray[sortedIndex];
+        }
     }
     /**
      * A method that implements a Quick Sort Algortithm

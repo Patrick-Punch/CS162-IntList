@@ -29,5 +29,13 @@ public class Main extends TestIntList {
         intArray.sort(SortableIntList.Algorithm.SELECTION);
         System.out.println("Selection Sort: " + intArray.toString());
         intArray.clear();
+
+        for (int i = 0; i < 10; i++){
+            int num = (int)(Math.random()*1000);            
+            intArray.add(num);
+        }
+        System.out.println("\nUnsorted Array: " + intArray.toString());
+        intArray.sort(SortableIntList.Algorithm.MERGE);
+        System.out.println("Merge Sort: " + intArray.toString());
     }
 }
