@@ -12,9 +12,6 @@ public class MyIntList extends TestIntList implements SortableIntList{
      * 
      * @param value the value to add.
      */
-     /*
-      * TODO: throw new exceptions where necessary
-      */
     public void add(int value){
     resize();
     intArray[totalNums] = value;
@@ -171,9 +168,16 @@ public class MyIntList extends TestIntList implements SortableIntList{
      * A method that implements a Merge Sort Algortithm
      */
     private void mergeSort(){
-        int [] sortedArray = new int[totalNums]; //temporary array to sort into
+        int [] sortedArray = new int[totalNums];
         mergeSortHelper(intArray, 0, totalNums-1, sortedArray);
     }
+    /**
+     * A method that recursively splits the array to be sorted into subarrays, and then calls merge() to combine them
+     * @param intArray - the array to sort
+     * @param start index[0] of intArrray
+     * @param end the array index at totalNums-1
+     * @param sortedArray - a new array to place the sorted values into 
+     */
     private void mergeSortHelper(int[] intArray, int start, int end, int[] sortedArray){
         if (start < end){
             int arrayCenter = (start + end) / 2; 
@@ -184,6 +188,14 @@ public class MyIntList extends TestIntList implements SortableIntList{
             merge(intArray, start, arrayCenter, end, sortedArray); //sort + combine 
         }
     }
+    /**
+     * a method that merges two arrays, and sorts the elements within to a new, sorted array 
+     * @param intArray - array to be sorted 
+     * @param start at index 0
+     * @param arrayCenter - the center of the array
+     * @param end at the last index to be sorted
+     * @param sortedArray - the sorted array
+     */
     private void merge(int[] intArray, int start, int arrayCenter, int end, int[] sortedArray){
         int leftIndex = start;
         int rightIndex = arrayCenter + 1;
@@ -199,7 +211,7 @@ public class MyIntList extends TestIntList implements SortableIntList{
             }
             sortedIndex++;
         }
-        while (leftIndex <= arrayCenter){ // merge elements from the left 
+        while (leftIndex <= arrayCenter){ //merge elements from the left 
             sortedArray[sortedIndex] = intArray[leftIndex];
             leftIndex++;
             sortedIndex++;
@@ -214,16 +226,87 @@ public class MyIntList extends TestIntList implements SortableIntList{
         }
     }
     /**
-     * A method that implements a Quick Sort Algortithm
+     * A method that implements a Quick Sort Algortithm by defining a pivot point. Then it sorts the pivot point value to its proper point in the array. Then, it takes all the elements less than it, and all the elements greater than it, treating them as subarrays, and sorts them recursively.
      */
     private void quickSort(){
-
+        quickSortHelper(0, totalNums-1);
     }
     /**
-     * A method that implements a Heap Sort Algortithm
+     * A method that loops through an array and recursivley splits and sorts the array
+     * @param start at index 0
+     * @param end at the last index to be sorted
      */
-    private void heapSort()
-    {
+    private void quickSortHelper(int start, int end){
+        if (start < end){ //base case for recursion
+            int partitionIndex = partition(start, end);
+            quickSortHelper(start, partitionIndex - 1);
+            quickSortHelper(partitionIndex + 1, end);
+        }
+    }
+    /**
+     * The partition method takes a pivot point to its sorted poition, and then sorting the two subarrays on the sides of the pivot
+     * @param start at index 0
+     * @param end at the last index to be sorted
+     * @return the partition index
+     */
+    private int partition(int start, int end){
+        int pivot = intArray[end]; //Initial pivot point at the end of the array
+        int partitionIndex = (start - 1);
 
+        for (int i = start; i < end; i++){//if the value to the right is smaller than the pivot, swap them
+            if (intArray[i] <= pivot){
+                partitionIndex++; 
+                int swapTemp = intArray[partitionIndex];
+                intArray[partitionIndex] = intArray[i];
+                intArray[i] = swapTemp;
+            }
+        } //once the pivot is sorted, sort the element at the next index
+        int swapTemp = intArray[partitionIndex + 1]; 
+        intArray[partitionIndex + 1] = intArray[end];
+        intArray[end] = swapTemp;
+        return partitionIndex + 1;
+    }
+    /**
+     * A method that implements a Heap Sort Algortithm by creating a binary tree (heap) representation of the array, setting the root value to its sorted index and then sorting the remaining heap until all elements are in the sorted array.
+     */
+    private void heapSort(){
+ 
+        for (int i = ((totalNums / 2) - 1); i >= 0; i--){ 
+            heapify(intArray, totalNums, i); //make a heap (tree)
+        }
+ 
+        for (int i = totalNums - 1; i > 0; i--){ //pull elements from heap
+            int temp = intArray[0]; //move root to the end
+            intArray[0] = intArray[i];
+            intArray[i] = temp;
+            heapify(intArray, i, 0); //heapify the smaller tree
+        }
+    }
+    /**
+     * A method that creates a binary tree representation (heap) of an array, and recursively calls its subtrees after placing the root into its sorted position
+     * @param intArray - the array to be sorted
+     * @param heapSize represents the size of the tree 
+     * @param i - represents the root
+     */
+    private void heapify(int[] intArray, int heapSize, int i){
+        int largest = i; // Initialize largest as root
+        int leftChild = 2 * i + 1; //index of the left child of ith node = 2 * i + 1
+        int rightChild = 2 * i + 2; //index of the right child of ith node  = 2 * i + 2
+        int temp;
+
+        if (leftChild < heapSize && intArray[leftChild] > intArray[largest]){ //check if larger than the root
+            largest = leftChild;
+        }
+ 
+        if (rightChild < heapSize && intArray[rightChild] > intArray[largest]){ //check if larger than the root
+            largest = rightChild;
+        }
+ 
+        if (largest != i){ //base case for recursive call                                      
+            temp = intArray[i];
+            intArray[i] = intArray[largest];
+            intArray[largest] = temp;
+            heapify(intArray, heapSize, largest); //recursive call for new subtrees
+        }
     }
 }
